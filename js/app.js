@@ -268,7 +268,7 @@ switch (window.location.pathname) {
         document.getElementById("index-posts").innerHTML = buildIndexPage();
         break;
     case "/views/about.html":
-        document.getElementById("numPosts").innerText = posts.length;
+        document.getElementById("num-posts").innerText = posts.length;
         break;
     case "/views/most-liked.html":
         document.getElementById("most-liked-posts").innerHTML = buildMostLikedPage();
