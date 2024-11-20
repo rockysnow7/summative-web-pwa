@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>message board | most liked</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <script src="/js/app.js" defer></script>
+    </head>
+    <body>
+        <h1>message board</h1>
+        <div id="nav">
+            <h2><a href="/views/index.html">messages</a></h2>
+            <h2><a href="/views/about.html">about</a></h2>
+            <h2><a class="current" href="/views/most-liked.html">most liked</a></h2>
+        </div>
+        <div id="main">
+            <h2>most liked</h2>
+            <div id="posts"></div>
+            <% if (numPosts > 0) { %>
+                <p>(<a href="/most-liked?limit=<%= currentLimit + 10 %>">...<%=numPosts%> more posts</a>)</p>
+            <% } %>
+        </div>
+    </body>
+</html>
