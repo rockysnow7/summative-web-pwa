@@ -14,10 +14,10 @@
         </div>
         <div id="main">
             <h2>most liked</h2>
-            <div id="posts"></div>
-            <% if (numPosts > 0) { %>
-                <p>(<a href="/most-liked?limit=<%= currentLimit + 10 %>">...<%=numPosts%> more posts</a>)</p>
-            <% } %>
+            <div id="most-liked-posts"></div> <!-- this will be populated by app.js -->
+            <p id="most-liked-load-more" style="display: none;">
+                (<a href="#" id="most-liked-load-more-link">...load more posts</a>)
+            </p>
         </div>
     </body>
 </html>
