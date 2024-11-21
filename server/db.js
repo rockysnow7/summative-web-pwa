@@ -49,7 +49,7 @@ const likePost = async (id) => {
 };
 
 /** Get the latest numPosts posts from the database. */
-const getLastPosts = async (numPosts) => {
+const getLatestPosts = async (numPosts) => {
     try {
         const collection = db.collection("posts");
         const cursor = collection.find().sort({ _id: -1 }).limit(numPosts);
@@ -97,6 +97,6 @@ const countPosts = async () => {
 
 module.exports.insertPost = insertPost;
 module.exports.likePost = likePost;
-module.exports.getLastPosts = getLastPosts;
+module.exports.getLatestPosts = getLatestPosts;
 module.exports.getMostLikedPosts = getMostLikedPosts;
 module.exports.countPosts = countPosts;

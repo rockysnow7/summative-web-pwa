@@ -1,9 +1,11 @@
 const express = require("express");
-const { insertPost, likePost, getLastPosts, getMostLikedPosts, countPosts } = require("./db.js");
+const cors = require("cors");
+const { insertPost, likePost, getLatestPosts, getMostLikedPosts, countPosts } = require("./db.js");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors())
 
 app.post("/insertPost", async (req, res) => {
     const post = {
@@ -31,9 +33,9 @@ app.post("/likePost", async (req, res) => {
     }
 });
 
-app.get("/getLastPosts", async (req, res) => {
+app.get("/getLatestPosts", async (req, res) => {
     try {
-        const posts = await getLastPosts(parseInt(req.query.numPosts));
+        const posts = await getLatestPosts(parseInt(req.query.numPosts));
         res.status(200).send(posts);
     } catch (e) {
         console.error(e);
