@@ -85,6 +85,7 @@ const countPosts = async () => {
     try {
         const collection = db.collection("posts");
         const numPosts = await collection.countDocuments();
+        console.log(`Counted ${numPosts} posts.`);
 
         return numPosts;
     } catch (e) {

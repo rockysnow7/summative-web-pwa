@@ -1,0 +1,67 @@
+const express = require("express");
+const { insertPost, likePost, getLastPosts, getMostLikedPosts, countPosts } = require("./db.js");
+
+const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.post("/insertPost", async (req, res) => {
+    const post = {
+        sender: req.body.sender,
+        content: req.body.content,
+    };
+
+    try {
+        await insertPost(post);
+        res.status(201).send("Post inserted.");
+    } catch (e) {
+        console.error(e);
+        res.status(500).send("Error inserting post.");
+    }
+});
+
+app.post("/likePost", async (req, res) => {
+    try {
+        console.log(JSON.stringify(req.body));
+        await likePost(req.body.id);
+        res.status(200).send("Post liked.");
+    } catch (e) {
+        console.error(e);
+        res.status(500).send("Error liking post.");
+    }
+});
+
+app.get("/getLastPosts", async (req, res) => {
+    try {
+        const posts = await getLastPosts(parseInt(req.query.numPosts));
+        res.status(200).send(posts);
+    } catch (e) {
+        console.error(e);
+        res.status(500).send("Error getting last posts.");
+    }
+});
+
+app.get("/getMostLikedPosts", async (req, res) => {
+    try {
+        const posts = await getMostLikedPosts(parseInt(req.query.numPosts));
+        res.status(200).send(posts);
+    } catch (e) {
+        console.error(e);
+        res.status(500).send("Error getting most liked posts.");
+    }
+});
+
+app.get("/countPosts", async (_req, res) => {
+    try {
+        const count = await countPosts();
+        res.status(200).send(count.toString());
+    } catch (e) {
+        console.error(e);
+        res.status(500).send("Error counting posts.");
+    }
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}...`);
+});
