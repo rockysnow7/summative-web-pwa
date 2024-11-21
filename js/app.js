@@ -1,5 +1,3 @@
-//const { getLatestPosts } = require("./db.js");
-
 const posts = [
     {
         sender: "Finn",
