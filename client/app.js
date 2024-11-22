@@ -52,7 +52,7 @@ const buildIndexPage = async () => {
         class="like"\n\
     >\n\
         <button class="like">\n\
-            <img src="../resources/like.png" data-src="../resources/like.png" alt="like button" />\n\
+            <img src="../resources/like.png" data-src="../resources/like.png" alt="A pink heart-shaped like button." />\n\
         </button>\n\
     </form>\n\
 </div>';
