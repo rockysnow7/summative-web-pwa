@@ -38,6 +38,18 @@ const countPosts = async () => {
     return count;
 };
 
+const likePost = async (id) => {
+    const response = await fetch("http://localhost:3000/likePost", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+    });
+
+    return response;
+};
+
 const buildIndexPage = async () => {
     const latestPosts = await getLatestPosts(currentIndexLimit);
     const indexPostTemplate =
@@ -46,12 +58,8 @@ const buildIndexPage = async () => {
         <span class="sender">POST_SENDER</span>: POST_CONTENT\n\
     </p>\n\
     <p class="likes">(POST_LIKES likes)</p>\n\
-    <form\n\
-        action="like-post/POST_ID"\n\
-        method="post"\n\
-        class="like"\n\
-    >\n\
-        <button class="like">\n\
+    <form class="like">\n\
+        <button class="like" onclick="likePost(\'POST_ID\')">\n\
             <img src="../resources/like.png" data-src="../resources/like.png" alt="A pink heart-shaped like button." />\n\
         </button>\n\
     </form>\n\
