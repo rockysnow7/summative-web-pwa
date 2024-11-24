@@ -50,6 +50,21 @@ const likePost = async (id) => {
     return response;
 };
 
+const postMessageFromForm = async () => {
+    const sender = document.getElementById("message-form-sender").value;
+    const content = document.getElementById("message-form-content").value;
+
+    const response = await fetch("http://localhost:3000/insertPost", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ sender, content }),
+    });
+
+    return response;
+};
+
 const buildIndexPage = async () => {
     const latestPosts = await getLatestPosts(currentIndexLimit);
     const indexPostTemplate =

@@ -14,15 +14,15 @@
         </div>
         <div id="main">
             <h2>messages</h2>
-            <form action="add-post" method="post">
-                <input type="text" name="sender" placeholder="name" required />
+            <form>
+                <input type="text" id="message-form-sender" placeholder="name" required />
                 <input
                     type="text"
-                    name="content"
+                    id="message-form-content"
                     placeholder="message"
                     required
                 />
-                <button>post</button>
+                <button onclick="postMessageFromForm()">post</button>
             </form>
             <div id="index-posts"></div> <!-- this will be populated by app.js -->
             <p id="index-load-more" style="display: none;">
