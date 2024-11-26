@@ -75,7 +75,7 @@ const buildIndexPage = async () => {
     <p class="likes">(POST_LIKES likes)</p>\n\
     <form class="like">\n\
         <button class="like" onclick="likePost(\'POST_ID\')">\n\
-            <img src="../resources/like.png" data-src="../resources/like.png" alt="A pink heart-shaped like button." />\n\
+            <img src="/resources/like.png" data-src="/resources/like.png" alt="A pink heart-shaped like button." />\n\
         </button>\n\
     </form>\n\
 </div>';
