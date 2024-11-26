@@ -58,6 +58,10 @@ const postMessageFromForm = async () => {
     const sender = document.getElementById("message-form-sender").value;
     const content = document.getElementById("message-form-content").value;
 
+    if (!sender || !content) {
+        return;
+    }
+
     const response = await fetch("http://localhost:3000/insertPost", {
         method: "POST",
         headers: {
