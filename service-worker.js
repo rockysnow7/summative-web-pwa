@@ -16,7 +16,7 @@ function addOfflineBanner(response) {
 
     return response.text().then(html => {
         const banner = `<div style="background-color: #fff3cd; color: #856404; padding: 12px; text-align: center; position: sticky; top: 0; z-index: 9999;">
-            You are viewing a cached version of this page.
+            <p>You are viewing a cached version of this page.</p>
         </div>`;
         const modifiedHtml = banner + html;
 

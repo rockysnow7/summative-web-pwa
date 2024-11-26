@@ -15,16 +15,17 @@
         <div id="main">
             <h2>messages</h2>
             <form>
-                <input type="text" id="message-form-sender" placeholder="name" required />
+                <input type="text" id="message-form-sender" placeholder="name" required disabled />
                 <input
                     type="text"
                     id="message-form-content"
                     placeholder="message"
                     required
+                    disabled
                 />
-                <button onclick="postMessageFromForm()">post</button>
+                <button id="message-form-button" onclick="postMessageFromForm()" disabled>post</button>
             </form>
-            <div id="index-posts"></div> <!-- this will be populated by app.js -->
+            <div id="index-posts"><p>You are offline, so cannot view or post messages.</p></div> <!-- this will be populated by app.js -->
             <p id="index-load-more" style="display: none;">
                 (<a href="#" id="index-load-more-link">...load more posts</a>)
             </p>

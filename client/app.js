@@ -181,6 +181,10 @@ const initPage = async () => {
         case "/views/index.html":
             var page = await buildIndexPage();
             document.getElementById("index-posts").innerHTML = page;
+
+            document.getElementById("message-form-sender").disabled = false;
+            document.getElementById("message-form-content").disabled = false;
+            document.getElementById("message-form-button").disabled = false;
             break;
         case "/views/about.html":
             var count = await countPosts();
