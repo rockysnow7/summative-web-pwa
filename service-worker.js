@@ -9,6 +9,23 @@ var contentToCache = [
     "/resources/like.png",
 ];
 
+function addOfflineBanner(response) {
+    if (!response.headers.get("content-type")?.includes("text/html")) {
+        return response;
+    }
+
+    return response.text().then(html => {
+        const banner = `<div style="background-color: #fff3cd; color: #856404; padding: 12px; text-align: center; position: sticky; top: 0; z-index: 9999;">
+            You are viewing a cached version of this page.
+        </div>`;
+        const modifiedHtml = banner + html;
+
+        return new Response(modifiedHtml, {
+            headers: response.headers
+        });
+    });
+}
+
 self.addEventListener("install", e => {
     console.log("[Service Worker] Install");
     e.waitUntil(
@@ -21,17 +38,24 @@ self.addEventListener("install", e => {
 
 self.addEventListener("fetch", e => {
     e.respondWith(
-        caches.match(e.request).then(r => {
-            console.log("[Service Worker] Fetching resource: " + e.request.url);
-            return r || fetch(e.request).then(response => {
+        fetch(e.request)
+            .then(response => {
                 return caches.open(cacheName).then(cache => {
-                    console.log("[Service Worker] Caching new resource: " + e.request.url);
                     cache.put(e.request, response.clone());
                     return response;
                 });
-            });
-        })
-    );
+            })
+            .catch(() => {
+                return caches.match(e.request).then(cachedResponse => {
+                    if (cachedResponse) {
+                        return addOfflineBanner(cachedResponse.clone());
+                    }
+                    return new Response("You are offline, and the requested resource cannot be accessed.", {
+                        status: 404,
+                        statusText: "Offline and resource not cached",
+                    });
+                });
+            }));
 });
 
 self.addEventListener("activate", e => {
