@@ -1,3 +1,7 @@
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/service-worker.js");
+}
+
 const POSTS_PER_PAGE = 10;
 let currentIndexLimit = POSTS_PER_PAGE;
 let currentMostLikedLimit = POSTS_PER_PAGE;
