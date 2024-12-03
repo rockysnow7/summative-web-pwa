@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const cors = require("cors");
 const { insertPost, likePost, getLatestPosts, getMostLikedPosts, countPosts } = require("./db.js");
 
@@ -6,6 +7,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors())
+
+app.use(express.static(path.join(__dirname, "..")));
 
 app.post("/insertPost", async (req, res) => {
     const post = {
