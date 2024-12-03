@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
+    "start": "concurrently \"http-server -c-1\" \"node server/api.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "concurrently": "^9.1.0",
     "cors": "^2.8.5",
     "express": "^4.21.1",
+    "http-server": "^14.1.1",
     "mongodb": "^6.10.0"
   }
 }
