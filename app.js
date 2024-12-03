@@ -7,7 +7,7 @@ let currentIndexLimit = POSTS_PER_PAGE;
 let currentMostLikedLimit = POSTS_PER_PAGE;
 
 const getLatestPosts = async (numPosts) => {
-    const response = await fetch("http://localhost:3000/getLatestPosts?" + new URLSearchParams({ numPosts }), {
+    const response = await fetch("/getLatestPosts?" + new URLSearchParams({ numPosts }), {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -19,7 +19,7 @@ const getLatestPosts = async (numPosts) => {
 };
 
 const getMostLikedPosts = async (numPosts) => {
-    const response = await fetch("http://localhost:3000/getMostLikedPosts?" + new URLSearchParams({ numPosts }), {
+    const response = await fetch("/getMostLikedPosts?" + new URLSearchParams({ numPosts }), {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -31,7 +31,7 @@ const getMostLikedPosts = async (numPosts) => {
 };
 
 const countPosts = async () => {
-    const response = await fetch("http://localhost:3000/countPosts", {
+    const response = await fetch("/countPosts", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const countPosts = async () => {
 };
 
 const likePost = async (id) => {
-    const response = await fetch("http://localhost:3000/likePost", {
+    const response = await fetch("/likePost", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const postMessageFromForm = async () => {
         return;
     }
 
-    const response = await fetch("http://localhost:3000/insertPost", {
+    const response = await fetch("/insertPost", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
