@@ -1,7 +1,19 @@
-const { MongoClient, ObjectId } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+require("dotenv").config();
 
-const uri = "mongodb://localhost:27017";
-const client = new MongoClient(uri);
+const mongoUsername = process.env.MONGO_USERNAME;
+const mongoPassword = process.env.MONGO_PASSWORD;
+console.log(`Mongo username: ${mongoUsername}`);
+console.log(`Mongo password: ${mongoPassword}`);
+
+const uri = `mongodb+srv://${mongoUsername}:${mongoPassword}@cluster0.geh7v.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const client = new MongoClient(uri, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
+});
 const db = client.db("db");
 
 /** Insert a post into the database. A post should be of the following form:
