@@ -1,12 +1,12 @@
 var cacheName = "message-board-v1";
 var contentToCache = [
-    "/",
-    "/views/about.html",
-    "/views/index.html",
-    "/views/most-liked.html",
-    "/css/style.css",
-    "/resources/cat.jpg",
-    "/resources/like.png",
+    "./",
+    "./views/about.html",
+    "./views/index.html", 
+    "./views/most-liked.html",
+    "./css/style.css",
+    "./resources/cat.jpg",
+    "./resources/like.png",
 ];
 
 function addOfflineBanner(response) {
@@ -29,20 +29,43 @@ function addOfflineBanner(response) {
 self.addEventListener("install", e => {
     console.log("[Service Worker] Install");
     e.waitUntil(
-        caches.open(cacheName).then(cache => {
-            console.log("[Service Worker] Caching all: app shell and content");
-            return cache.addAll(contentToCache);
-        })
+        caches.open(cacheName)
+            .then(cache => {
+                console.log("[Service Worker] Caching all: app shell and content");
+                return Promise.all(
+                    contentToCache.map(url => {
+                        return cache.add(url).catch(err => {
+                            console.error(`[Service Worker] Failed to cache: ${url}`, err);
+                        });
+                    })
+                );
+            })
+            .catch(err => {
+                console.error('[Service Worker] Cache installation failed:', err);
+            })
     );
 });
 
 self.addEventListener("fetch", e => {
+    if (!e.request.url.startsWith("http") || !e.request.url.includes(self.location.origin)) {
+        return;
+    }
+
     e.respondWith(
         fetch(e.request)
             .then(response => {
-                return caches.open(cacheName).then(cache => {
-                    cache.put(e.request, response.clone());
+                if (!response || response.status !== 200 || response.type !== "basic") {
                     return response;
+                }
+
+                return caches.open(cacheName).then(cache => {
+                    try {
+                        cache.put(e.request, response.clone());
+                        return response;
+                    } catch (err) {
+                        console.error(`[Service Worker] Cache put failed: ${e.request.url}`, err);
+                        return response;
+                    }
                 });
             })
             .catch(() => {
