@@ -1,0 +1,21 @@
+{
+    "name": "Message Board",
+    "short_name": "MessageBoard",
+    "description": "A simple message board app.",
+    "icons": [
+        {
+            "src": "resources/cat.jpg",
+            "sizes": "1600x1598",
+            "type": "image/jpg"
+        },
+        {
+            "src": "resources/like.png",
+            "sizes": "240x240",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/views/index.html",
+    "display": "fullscreen",
+    "theme_color": "#ff99cc",
+    "background_color": "#f0f0f0"
+}
